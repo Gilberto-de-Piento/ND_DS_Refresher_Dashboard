@@ -40,7 +40,6 @@
     <div class="note">
       <strong>How to use this:</strong> Treat each session as one evening. Check tasks off as you complete them. If you prefer specific days, write them next to the session titles or print this page and mark it up.
     </div>
-
     <section class="week">
       <h2>Week 1 – Foundations & Linear Equations <span class="pill">Core algebra</span></h2>
       <p class="small">Focus on order of operations, simplifying expressions, and solving 1–2 step equations.</p>
@@ -48,7 +47,7 @@
       <div class="session">
         <div class="session-title">Session 1 – Warm‑up & order of operations</div>
         <ul class="tasks">
-          <li><input type="checkbox" /> <span>Watch: <a href="https://www.youtube.com/watch?v=MHeirBPOI6w" target="_blank" rel="noopener noreferrer">Algebra For Beginners – Basic Introduction (first ~25 minutes)</a>.</span></li>
+          <li><input type="checkbox" id="phase1-session1-task1" /> <span>Watch: <a href="https://www.youtube.com/watch?v=MHeirBPOI6w" target="_blank" rel="noopener noreferrer">Algebra For Beginners – Basic Introduction (first ~25 minutes)</a>.</span></li>
           <li><input type="checkbox" /> <span>Khan Academy: In <strong>Algebra foundations</strong>, do the practice sets for order of operations & combining like terms.</span></li>
           <li><input type="checkbox" /> <span>Do at least 10 mixed problems involving parentheses, exponents, and fractions (from Khan practice or a textbook section).</span></li>
         </ul>
@@ -151,6 +150,27 @@
 
     <div class="divider"></div>
     <p class="small"><strong>Next step:</strong> After these 3 weeks feel solid, you can build a similar dashboard for Phase 2 (functions & graphs) and Phase 3 (limits & derivatives), reusing this same "session" pattern.</p>
-  </main>
+</main>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    
+    checkboxes.forEach((cb, index) => {
+      // create a stable key based on index or, better, an id
+      const key = cb.id || 'checkbox-' + index;
+
+      // restore saved state
+      const saved = localStorage.getItem(key);
+      if (saved !== null) {
+        cb.checked = (saved === 'true');
+      }
+
+      // save on change
+      cb.addEventListener('change', () => {
+        localStorage.setItem(key, cb.checked.toString());
+      });
+    });
+  });
+</script>
 </body>
 </html>
